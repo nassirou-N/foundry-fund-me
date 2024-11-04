@@ -15,7 +15,7 @@ contract FundMe {
     address[] public funders;
     mapping(address funder => uint256 amountFunded) public addressToAmountFunded;
 
-    address immutable _owner;
+    address public immutable _owner;
 
     constructor() {
         _owner = msg.sender;
