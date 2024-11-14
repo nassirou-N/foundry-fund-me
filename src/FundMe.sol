@@ -17,13 +17,14 @@ contract FundMe {
 
     address public immutable _owner;
 
-    constructor() {
+    constructor(address priceFeed) {
         _owner = msg.sender;
+        s_priceFeed = AggregatorV3Interface(priceFeed);
     }
 
     function fund() public payable {
         require(msg.sender == address(0), AddressNotValid());
-        require(msg.value.getConversionRate() >= MINIMUM_USD, "didn't send enought ETH");
+        require(msg.value.getConversionRate(s_priceFeed) >= MINIMUM_USD, "didn't send enought ETH");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
     }
