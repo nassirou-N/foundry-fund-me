@@ -3,6 +3,7 @@
 pragma solidity ^0.8.26;
 
 import {PriceConverter} from "./PriceConverter.sol";
+import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 //custom error
 error AddressNotValid();
@@ -16,6 +17,7 @@ contract FundMe {
     mapping(address funder => uint256 amountFunded) public addressToAmountFunded;
 
     address public immutable _owner;
+    AggregatorV3Interface s_priceFeed;
 
     constructor(address priceFeed) {
         _owner = msg.sender;

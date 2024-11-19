@@ -10,8 +10,9 @@ import{DeployFundMe} from "../script/DeployFundMe.s.sol";
 contract FundMeTest is Test {
     FundMe fundMe ;
     function setUp() external {
-        DeployFundMe deployFundMe = new DeployFundMe()
-        fundMe = deployFundMe.run();
+        DeployFundMe deployFundMe = new DeployFundMe();
+        address payable fundMeAddress = payable(deployFundMe.run());
+        fundMe = FundMe(fundMeAddress);
     }
 
     function testMinimuimUSD() public {
